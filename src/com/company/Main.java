@@ -70,20 +70,18 @@ public class Main {
                     orders.readyOrders.put(orderReference, order);
 
                 }
-
-
             }
             if(orders.readyOrders.containsKey(orderReference)){
                 if(withMissingBike(orderLine)){
                     Order readyMissingBike =  orders.readyOrders.get(orderReference);
 
-
-                    if(orders.readyOrdersMissingBikeByPolicy.containsKey(readyMissingBike.policy)){
-                        orders.readyOrdersMissingBikeByPolicy.get(readyMissingBike.policy).add(readyMissingBike);
+                    String policy = readyMissingBike.policy;
+                    if(orders.readyOrdersMissingBikeByPolicy.containsKey(policy)){
+                        orders.readyOrdersMissingBikeByPolicy.get(policy).add(readyMissingBike);
                     } else {
-                        Set<Order> ordersWithPolicy = new HashSet<>();
-                        ordersWithPolicy.add(readyMissingBike);
-                        orders.readyOrdersMissingBikeByPolicy.put(readyMissingBike.policy, ordersWithPolicy);
+                        Set<Order> newOrdersWithPolicy = new HashSet<>();
+                        newOrdersWithPolicy.add(readyMissingBike);
+                        orders.readyOrdersMissingBikeByPolicy.put(policy, newOrdersWithPolicy);
                     }
 
                 }
